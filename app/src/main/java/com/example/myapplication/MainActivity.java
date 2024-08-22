@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     String bt1,bt2,bt3,bt4,bt5,bt6,bt7,bt8,bt9; // To store values of each button
     TextView txt_turn,txt_winner;
     int flag = 0; // This is to decide whether the turn is of X or O
-    int moves_count = 0; // This will keep the count of total number of moves played by both players combined
+    int moves_count = 0, winner_found = 0; // This will keep the count of total number of moves played by both players combined
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // Resetting the moves counter and the flags to default value
         flag=0;
         moves_count=0;
+        winner_found=0;
         txt_turn.setText("");
         txt_winner.setText("");
     }
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public void btn_chk(View v /* Variable of view. As the event is fired on the button, it will have reference of the button. if the event is set on textview, this variable will have the reference of the textview which has invoked the event*/){
         Button btn_current = (Button) v;  // Typecasting the view object on which the onClick event is fired into Button object
         // It is assumed that " X " plays the 1st move
-        if (btn_current.getText().toString().equals(""))
+        if (btn_current.getText().toString().equals("") && winner_found==0)
         {
             moves_count++;
 
@@ -97,20 +98,28 @@ public class MainActivity extends AppCompatActivity {
                 // All the winning conditions
                 if(bt1.equals(bt2) && bt2.equals(bt3) && !bt1.equals("")){
                     txt_winner.setText(bt1);
+                    winner_found =1;
                 } else if (bt4.equals(bt5) && bt5.equals(bt6) && !bt4.equals("")) {
                     txt_winner.setText(bt4);
+                    winner_found =1;
                 }else if (bt7.equals(bt8) && bt8.equals(bt9) && !bt7.equals("")) {
                     txt_winner.setText(bt7);
+                    winner_found =1;
                 }else if (bt1.equals(bt4) && bt4.equals(bt7) && !bt1.equals("")) {
                     txt_winner.setText(bt1);
+                    winner_found =1;
                 }else if (bt2.equals(bt5) && bt5.equals(bt8) && !bt2.equals("")) {
                     txt_winner.setText(bt2);
+                    winner_found =1;
                 }else if (bt3.equals(bt6) && bt6.equals(bt9) && !bt3.equals("")) {
                     txt_winner.setText(bt3);
+                    winner_found =1;
                 }else if (bt1.equals(bt5) && bt5.equals(bt9) && !bt1.equals("")) {
                     txt_winner.setText(bt1);
+                    winner_found =1;
                 }else if (bt3.equals(bt5) && bt5.equals(bt7) && !bt3.equals("")) {
                     txt_winner.setText(bt3);
+                    winner_found =1;
                 }
             }
             else if(moves_count > 9){
